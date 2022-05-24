@@ -1,12 +1,13 @@
 import { dbConnect } from "lib/mongodb";
 import { generateId } from "lib/util/generator";
 
-export default async function createChannel(name: string) {
+export default async function createChannel(name: string, author: string) {
   const options = {
     name,
     createdAt: new Date().toISOString(),
     id: generateId(),
-    icon: "/api/cdn/1",
+    icon: process.env.DOMAIN + "/_next/image?url=/cdn/1.png&w=128&q=78",
+    members: [author],
   };
 
   const db = await dbConnect();

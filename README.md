@@ -19,3 +19,4 @@ MONGODB_NAME=
 - [Sharp](https://npmjs.com/package/sharp)
 - [Sass](https://sass-lang.com/)
 - [Iron Session](https://www.npmjs.com/package/iron-session)
+- [Socket.IO](https://socket.io/)
