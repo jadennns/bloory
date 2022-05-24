@@ -1,0 +1,42 @@
+/** COLORS PALLETE ARE FROM DOGEHOUSE TV SOURCE
+/** https://github.com/benawad/dogehouse/blob/staging/kibbeh/src/styles/globals.css **/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-button-text: #fff;
+  --color-primary-100: #dee3ea;
+  --color-primary-200: #b2bdcd;
+  --color-primary-300: #5d7290;
+  --color-primary-600: #323d4d;
+  --color-primary-700: #242c37;
+  --color-primary-800: #151a21;
+  --color-primary-900: #0b0e11;
+  --color-secondary-washed-out: #879eed;
+  --color-secondary: #5575e7;
+  --color-accent-glow: rgba(253, 77, 77, 0.3);
+  --color-accent: #fd4d4d;
+  --color-accent-hover: #fd6868;
+  --color-accent-disabled: #f5bfbf;
+  --screen-height-reduction: 0px;
+  --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Uni Sans", Verdana, Tahoma;
+  background-color: var(--color-primary-900);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
