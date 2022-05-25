@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function AppIndex() {
   useEffect(() => {
-    setTimeout(() => location.replace("/app/@me"), 5000);
+    setTimeout(() => location.replace("/app/@me"), 3000);
   }, []);
 
   return (

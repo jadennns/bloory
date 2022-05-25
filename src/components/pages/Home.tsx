@@ -1,10 +1,17 @@
 import Title from "components/seo/Title";
 import Navbar from "components/ui/Navbar/Navbar";
 import Image from "next/image";
-import { lazy } from "react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import styles from "styles/sass/Animations.module.scss";
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.r) router.replace("/");
+  }, [router]);
+
   return (
     <>
       <Title title='Home' />

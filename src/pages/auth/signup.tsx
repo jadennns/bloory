@@ -1,7 +1,7 @@
-import Login from "components/pages/auth/Login";
+import SignUp from "components/pages/auth/Signup";
 import { withSessionSsr } from "lib/session";
 
-export default Login;
+export default SignUp;
 
 export const getServerSideProps = withSessionSsr(async function NoUser({
   req,

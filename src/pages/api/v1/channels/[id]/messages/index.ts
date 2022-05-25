@@ -7,11 +7,11 @@ const client = io(process.env.SOCKET_IO_CLIENT);
 
 export default withSessionRoute(async (req, res) => {
   if (req.method == "POST") {
-    const { content, author, channel_id } = JSON.parse(req.body);
+    const { content, author, channel_id, type } = JSON.parse(req.body);
     if (!content || !author || !channel_id)
       return res.status(400).send({ message: "Bad body request" });
 
-    const data = await createMessage({ content, author, channel_id });
+    const data = await createMessage({ content, author, channel_id, type });
     client.emit("MESSAGE_CREATE", {
       ...data,
       author: req.session.user,

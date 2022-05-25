@@ -18,7 +18,7 @@ export default function UserTab({ user }: Props) {
         />
         <div className='flex flex-col items-start '>
           <p className='text-white text-base font-semibold'>{user.username}</p>
-          <p className='text-sm text-gray-400'>{user.email}</p>
+          <p className='text-xs text-gray-400'>{user.id}</p>
         </div>
       </div>
       <Link href={"/app/@me/settings"}>

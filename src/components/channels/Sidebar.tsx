@@ -2,8 +2,10 @@ import UserTab from "components/ui/User/UserTab";
 import { useState } from "react";
 import { User } from "../../../@types/dts/user";
 import { MdCreateNewFolder } from "react-icons/md";
+import { AiFillHome } from "react-icons/ai";
 import CreateChannel from "./CreateChannel";
 import Channels from "./Channels";
+import Link from "next/link";
 
 interface Props {
   user: User;
@@ -18,11 +20,19 @@ export default function Sidebar({ user }: Props) {
         <div className='flex flex-col w-full md:w-64 text-gray-500 bg-gray-800 flex-shrink-0'>
           <div className='flex-shrink-0 px-8 py-4 flex flex-col items-center space-y-6 justify-between'>
             <UserTab user={user} />
-            <MdCreateNewFolder
-              className='text-accent hover:text-accent-hover cursor-pointer'
-              size={50}
-              onClick={() => setCreateChannelOpen(!createChannelOpen)}
-            />
+            <div className='flex items-center space-x-2'>
+              <Link href={"/app/@me"}>
+                <AiFillHome
+                  className='text-primary-100 hover:text-primary-200 cursor-pointer'
+                  size={40}
+                />
+              </Link>
+              <MdCreateNewFolder
+                className='text-accent hover:text-accent-hover cursor-pointer'
+                size={50}
+                onClick={() => setCreateChannelOpen(!createChannelOpen)}
+              />
+            </div>
             <Channels />
           </div>
         </div>

@@ -5,12 +5,14 @@ interface Props {
   content: string;
   author: string;
   channel_id: string;
+  type: string;
 }
 
 export default async function createMessage({
   content,
   author,
   channel_id,
+  type,
 }: Props) {
   const db = await dbConnect();
 
@@ -20,6 +22,7 @@ export default async function createMessage({
     author,
     channel_id,
     createdAt: new Date().toISOString(),
+    type,
   };
 
   await db.collection("messages").insertOne(options);

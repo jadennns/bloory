@@ -1,4 +1,5 @@
 import Title from "components/seo/Title";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { User } from "../../../../@types/dts/user";
@@ -9,25 +10,20 @@ export default function Settings({ user }: { user: User }) {
   const [username, setUsername] = useState(user.username);
 
   const handleSave = () => {
-    if (username == user.username)
-      return toast.error(
-        "Username is the same with old username. Change to save settings.",
-        {
-          position: "top-right",
-        }
-      );
+    if (username == user.username && avatar == user.avatar)
+      return toast.error("You need to make some changes to save.", {
+        position: "top-right",
+      });
 
-    if (avatar == user.avatar)
-      return toast.error(
-        "Avatar is the same with old avatar. Change to save settings.",
-        {
-          position: "top-right",
-        }
-      );
+    if (avatar != user.avatar) {
+      fetch("/api/v1/cdn", {
+        method: "POST",
+        body: JSON.stringify({ data: avatar, user: user.id }),
+      });
+    }
 
-    fetch("/api/v1/cdn", {
-      method: "POST",
-      body: JSON.stringify({ data: avatar, user: user.id }),
+    return toast.success("Saved changes.", {
+      position: "top-right",
     });
   };
 
@@ -55,6 +51,19 @@ export default function Settings({ user }: { user: User }) {
         >
           Save Changes
         </button>
+        <br />
+        <div className='flex items-center space-x-3'>
+          <Link href='/app/@me'>
+            <button className='rounded-md px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white'>
+              Home
+            </button>
+          </Link>
+          <Link href='/api/v1/this/auth/destroy'>
+            <button className='rounded-md px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white'>
+              Logout
+            </button>
+          </Link>
+        </div>
       </div>
     </>
   );

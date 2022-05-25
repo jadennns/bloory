@@ -26,7 +26,7 @@ export default function Channels() {
 
   return (
     <>
-      <div className='flex flex-col space-y-2 items-center'>
+      <div className='flex flex-col space-y-2 items-center h-[28rem] scrollbar-thin scrollbar-thumb-amber-500'>
         {channels
           .sort((a, b) => {
             const nameA = a.name.toLowerCase(),

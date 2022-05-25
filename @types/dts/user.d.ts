@@ -19,4 +19,5 @@ export interface Message {
   author: User;
   channel_id: string;
   createdAt: string;
+  type: string;
 }
