@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
@@ -40,7 +41,7 @@ export default function Channels() {
           .map((channel, index) => (
             <Link href={"/app/@me/channels/" + channel.id} key={index + 1}>
               <div className='flex items-center space-x-2 hover:bg-gray-700 px-2 py-2 w-[15rem] rounded-md cursor-pointer'>
-                <img
+                <Image
                   src={channel.icon}
                   alt={`${channel.name} Icon`}
                   width={42}

@@ -1,9 +1,10 @@
+import Image from "next/image";
 import { Message } from "../../../../../@types/dts/user";
 
 export default function MessageF({ message }: { message: Message }) {
   return (
     <div className='flex items-center space-x-2 w-[70rem] rounded-md hover:bg-gray-700 px-[0.5rem] py-1'>
-      <img
+      <Image
         src={message.author.avatar}
         alt={`${message.author.username} Avatar`}
         width={42}
@@ -15,7 +16,7 @@ export default function MessageF({ message }: { message: Message }) {
           {message.author.username}
         </p>
         {message.type == "image" && (
-          <img
+          <Image
             src={message.content}
             alt='Message Attachment'
             width={80}

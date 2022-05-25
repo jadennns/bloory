@@ -1,4 +1,3 @@
-import Title from "components/seo/Title";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";

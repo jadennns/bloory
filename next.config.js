@@ -6,6 +6,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "src", "styles", "sass")],
   },
+  images: {
+    domains: ["localhost", "bloory.netlify.app"],
+  },
 };
 
 module.exports = nextConfig;

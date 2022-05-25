@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { User } from "../../../../@types/dts/user";
 
@@ -9,7 +10,7 @@ export default function UserTab({ user }: Props) {
   return (
     <div className='flex flex-col items-center space-y-4 '>
       <div className='flex items-start space-y-2 space-x-2 '>
-        <img
+        <Image
           src={user.avatar}
           alt={`${user.username} Avatar`}
           width={64}

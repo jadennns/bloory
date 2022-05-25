@@ -6,6 +6,7 @@ import { AiFillHome } from "react-icons/ai";
 import CreateChannel from "./CreateChannel";
 import Channels from "./Channels";
 import Link from "next/link";
+import ReactTooltip from "react-tooltip";
 
 interface Props {
   user: User;
@@ -13,6 +14,7 @@ interface Props {
 
 export default function Sidebar({ user }: Props) {
   const [createChannelOpen, setCreateChannelOpen] = useState(false);
+  const [channelTooltip, setChannelTooltip] = useState(false);
 
   return (
     <>
@@ -31,7 +33,15 @@ export default function Sidebar({ user }: Props) {
                 className='text-accent hover:text-accent-hover cursor-pointer'
                 size={50}
                 onClick={() => setCreateChannelOpen(!createChannelOpen)}
+                data-tip=''
+                onMouseEnter={() => setChannelTooltip(true)}
+                onMouseLeave={() => setChannelTooltip(false)}
               />
+              {channelTooltip && (
+                <ReactTooltip>
+                  <p className='text-xs'>Create Channel</p>
+                </ReactTooltip>
+              )}
             </div>
             <Channels />
           </div>

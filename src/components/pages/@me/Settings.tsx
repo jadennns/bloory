@@ -22,6 +22,13 @@ export default function Settings({ user }: { user: User }) {
       });
     }
 
+    if (username != user.username) {
+      fetch("/api/v1/@me/update", {
+        method: "POST",
+        body: JSON.stringify({ username }),
+      });
+    }
+
     return toast.success("Saved changes.", {
       position: "top-right",
     });

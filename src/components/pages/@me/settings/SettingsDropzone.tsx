@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -28,7 +29,7 @@ export default function SettingsDropzone({ dispatch, avatar }: Props) {
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      <img
+      <Image
         src={avatar}
         alt={`Avatar`}
         width={"128px"}
