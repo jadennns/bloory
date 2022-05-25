@@ -9,6 +9,9 @@
 ```env
 MONGODB_URI=
 MONGODB_NAME=
+COOKIE_SECRET=
+DOMAIN=
+SOCKET_IO_CLIENT=
 ```
 
 ## Utilities
