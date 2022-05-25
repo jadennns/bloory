@@ -7,7 +7,7 @@ import { Message, User } from "../../../../../@types/dts/user";
 import MessageF from "./Message";
 import MessageText from "./MessageText";
 
-const client = io("http://localhost:4000/");
+const client = io("https://bloory-ws.netlify.app/.netlify/functions/server");
 
 export default function Messages({ user }: { user: User }) {
   const [messages, setMessages] = useState<Message[]>([]);

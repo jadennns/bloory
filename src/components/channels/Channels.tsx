@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { Channel } from "../../../@types/dts/user";
 
-const client = io("http://localhost:4000/");
+const client = io("https://bloory-ws.netlify.app/.netlify/functions/server");
 
 export default function Channels() {
   const [channels, setChannels] = useState<Channel[]>([]);
