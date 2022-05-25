@@ -12,3 +12,11 @@ export interface Channel {
   icon: string;
   createdAt: string;
 }
+
+export interface Message {
+  content: string;
+  id: string;
+  author: User;
+  channel_id: string;
+  createdAt: string;
+}

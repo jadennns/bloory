@@ -16,6 +16,18 @@ export async function getChannelMessages(channel_id: string) {
           __v: 0,
         },
       },
+      {
+        $lookup: {
+          from: "users",
+          localField: "author",
+          foreignField: "id",
+          as: "author",
+          pipeline: [{ $project: { _id: 0, __v: 0, password: 0, email: 0 } }],
+        },
+      },
+      {
+        $unwind: "$author",
+      },
     ])
     .toArray();
 
