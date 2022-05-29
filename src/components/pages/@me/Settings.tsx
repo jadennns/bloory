@@ -39,9 +39,7 @@ export default function Settings({ user }: { user: User }) {
       <Title title='Settings | @Me' />
       <div className='flex flex-col space-y-4 items-center justify-center mt-32'>
         <div className='flex items-center space-x-6'>
-          <div className='border-4 border-indigo-600 rounded-full '>
-            <SettingsDropzone dispatch={setAvatar} avatar={avatar} />
-          </div>
+          <SettingsDropzone dispatch={setAvatar} avatar={avatar} />
           <div className='flex flex-col items-start space-y-1'>
             <p className='text-white text-xl font-semibold'>Username</p>
             <input

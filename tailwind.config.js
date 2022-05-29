@@ -27,6 +27,15 @@ module.exports = {
           disabled: "var(--color-accent-disabled)",
         },
         black: "#000",
+        swatch: {
+          1: "#040505",
+          2: "#a3a2aa",
+          3: "#787986",
+          4: "#5d5f6c",
+          5: "#3b3940",
+          6: "#ccd3d5",
+          7: "#1135ea"
+        }
       },
     },
   },

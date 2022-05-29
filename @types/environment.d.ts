@@ -5,7 +5,7 @@ declare global {
       MONGODB_NAME: string;
       COOKIE_SECRET: string;
       DOMAIN: string;
-      SOCKET_IO_CLIENT: string;
+      SOCKET_URL: string;
     }
   }
 }

@@ -1,8 +1,8 @@
 import createChannel from "lib/controllers/createChannel";
 import { withSessionRoute } from "lib/session";
-import { io } from "socket.io-client";
+import { ioConnect } from "lib/util/socketio";
 
-const client = io(process.env.SOCKET_IO_CLIENT);
+const client = ioConnect();
 
 export default withSessionRoute(async (req, res) => {
   if (req.method !== "POST")

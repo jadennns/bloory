@@ -1,66 +1,87 @@
-import UserTab from "components/ui/User/UserTab";
-import { useState } from "react";
-import { User } from "../../../@types/dts/user";
-import { MdCreateNewFolder } from "react-icons/md";
-import { AiFillHome } from "react-icons/ai";
-import CreateChannel from "./CreateChannel";
-import Channels from "./Channels";
+import Image from "next/image";
 import Link from "next/link";
-import ReactTooltip from "react-tooltip";
+import { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import Channels from "./Channels";
+import Modal, { RenderModalBackdropProps } from "react-overlays/Modal";
+import styled from "styled-components";
 
-interface Props {
-  user: User;
-}
+let rand = () => Math.floor(Math.random() * 20) - 10;
 
-export default function Sidebar({ user }: Props) {
-  const [createChannelOpen, setCreateChannelOpen] = useState(false);
-  const [channelTooltip, setChannelTooltip] = useState(false);
+const Backdrop = styled("div")`
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+`;
+
+// we use some pseudo random coords so nested modals
+// don't sit right on top of each other.
+const RandomlyPositionedModal = styled(Modal)`
+  position: fixed;
+  width: 400px;
+  z-index: 1040;
+  top: ${() => 50 + rand()}%;
+  left: ${() => 50 + rand()}%;
+  border: 1px solid #e5e5e5;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+`;
+
+export default function Sidebar() {
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-      <div className='md:flex flex-col md:flex-row md:min-h-screen '>
-        <div className='flex flex-col w-full md:w-64 text-gray-500 bg-gray-800 flex-shrink-0'>
-          <div className='flex-shrink-0 px-8 py-4 flex flex-col items-center space-y-6 justify-between'>
-            <UserTab user={user} />
-            <div className='flex items-center space-x-2'>
-              <Link href={"/app/@me"}>
-                <AiFillHome
-                  className='text-primary-100 hover:text-primary-200 cursor-pointer'
-                  size={40}
-                />
-              </Link>
-              <MdCreateNewFolder
-                className='text-accent hover:text-accent-hover cursor-pointer'
-                size={50}
-                onClick={() => setCreateChannelOpen(!createChannelOpen)}
-                data-tip=''
-                onMouseEnter={() => setChannelTooltip(true)}
-                onMouseLeave={() => setChannelTooltip(false)}
-              />
-              {channelTooltip && (
-                <ReactTooltip>
-                  <p className='text-xs'>Create Channel</p>
-                </ReactTooltip>
-              )}
-            </div>
-            <Channels />
+      <div className='fixed top-0 left-0 h-screen w-[72px] flex flex-col space-y-1 bg-swatch-5'>
+        <Link href={"/"}>
+          <Image
+            src={"/Logo.png"}
+            width={80}
+            height={80}
+            className='rounded-md cursor-pointer'
+            alt='Logo'
+          />
+        </Link>
+        <hr className='border border-swatch-3 rounded-full mx-2' />
+        <Channels />
+        <hr className='border border-swatch-3 rounded-full mx-2' />
+        <div
+          className='sidebar-icon group'
+          onClick={() => setOpenModal(!openModal)}
+        >
+          <div className='bg-swatch-7 text-white rounded-md shadow-xl px-2 py-2 trans-grow'>
+            <AiOutlinePlus size={20} />
           </div>
+          <span className='sidebar-tooltip group-hover:scale-100'>
+            Create channel
+          </span>
         </div>
       </div>
-      {createChannelOpen && (
-        <div className='flex items-center justify-center mt-0'>
-          <CreateChannel
-            user={user}
-            onAccept={(data) => {
-              setCreateChannelOpen(false);
-              setTimeout(
-                () => location.replace("/app/@me/channels/" + data.id),
-                2000
-              );
-            }}
-          />
+      <RandomlyPositionedModal
+        show={openModal}
+        onHide={() => setOpenModal(false)}
+        renderBackdrop={(props: any) => <Backdrop {...props} />}
+        aria-labelledby='modal-label'
+      >
+        <div>
+          <h4 id='modal-label'>Text in a modal</h4>
+          <p>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </p>
         </div>
-      )}
+      </RandomlyPositionedModal>
     </>
   );
 }
+
+// function Backdrop(props: RenderModalBackdropProps) {
+//   return (
+//     <div className='fixed z-[1040] top-0 bottom-0 left-0 right-0 bg-[#000] opacity-[0.5]'></div>
+//   );
+// }

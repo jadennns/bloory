@@ -9,12 +9,12 @@ interface Props {
 export default function UserTab({ user }: Props) {
   return (
     <div className='flex flex-col items-center space-y-4 '>
-      <div className='flex items-start space-y-2 space-x-2 '>
-        <Image
+      <div className='flex items-center  space-x-2 '>
+        <img
           src={user.avatar}
           alt={`${user.username} Avatar`}
-          width={64}
-          height={64}
+          width={52}
+          height={52}
           className='rounded-full'
         />
         <div className='flex flex-col items-start '>

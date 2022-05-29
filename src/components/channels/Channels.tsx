@@ -1,10 +1,10 @@
+import { ioConnect } from "lib/util/socketio";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 import { Channel } from "../../../@types/dts/user";
 
-const client = io("https://bloory-ws.netlify.app/.netlify/functions/server");
+const client = ioConnect();
 
 export default function Channels() {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -27,32 +27,32 @@ export default function Channels() {
 
   return (
     <>
-      <div className='flex flex-col space-y-2 items-center h-[28rem] scrollbar-thin scrollbar-thumb-amber-500'>
-        {channels
-          .sort((a, b) => {
-            const nameA = a.name.toLowerCase(),
-              nameB = b.name.toLowerCase();
-            if (nameA < nameB)
-              //sort string ascending
-              return -1;
-            if (nameA > nameB) return 1;
-            return 0;
-          })
-          .map((channel, index) => (
-            <Link href={"/app/@me/channels/" + channel.id} key={index + 1}>
-              <div className='flex items-center space-x-2 hover:bg-gray-700 px-2 py-2 w-[15rem] rounded-md cursor-pointer'>
-                <Image
-                  src={channel.icon}
-                  alt={`${channel.name} Icon`}
-                  width={42}
-                  height={42}
-                  className='rounded-full'
-                />
-                <p className='text-white text-base'>{channel.name}</p>
-              </div>
-            </Link>
-          ))}
-      </div>
+      {channels
+        .sort((a, b) => {
+          const nameA = a.name.toLowerCase(),
+            nameB = b.name.toLowerCase();
+          if (nameA < nameB)
+            //sort string ascending
+            return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        })
+        .map((channel, index) => (
+          <Link href={"/app/@me/channels/" + channel.id} key={index + 1}>
+            <div className='sidebar-icon group shadow-xl trans-grow'>
+              <Image
+                src={channel.icon}
+                alt={`${channel.name} Icon`}
+                width={42}
+                height={42}
+                className='rounded-md'
+              />
+              <span className='sidebar-tooltip group-hover:scale-100'>
+                {channel.name}
+              </span>
+            </div>
+          </Link>
+        ))}
     </>
   );
 }

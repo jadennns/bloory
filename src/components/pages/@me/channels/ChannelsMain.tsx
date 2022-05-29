@@ -14,7 +14,7 @@ export default function ChannelsMain({
     <>
       <Title title={channel.name} />
       <div className='absolute inset-y-0 left-0'>
-        <Sidebar user={user} />
+        <Sidebar />
       </div>
       <Messages user={user} />
     </>

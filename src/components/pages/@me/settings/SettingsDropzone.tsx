@@ -32,8 +32,8 @@ export default function SettingsDropzone({ dispatch, avatar }: Props) {
       <Image
         src={avatar}
         alt={`Avatar`}
-        width={"128px"}
-        height={"128px"}
+        width={128}
+        height={128}
         className='rounded-full cursor-pointer'
       />
     </div>

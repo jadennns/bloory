@@ -1,9 +1,9 @@
 import { getChannelMessages } from "../../../../../../lib/controllers/messages/getChannelMessages";
 import createMessage from "lib/controllers/messages/createMessage";
 import { withSessionRoute } from "lib/session";
-import { io } from "socket.io-client";
+import { ioConnect } from "lib/util/socketio";
 
-const client = io(process.env.SOCKET_IO_CLIENT);
+const client = ioConnect();
 
 export default withSessionRoute(async (req, res) => {
   if (req.method == "POST") {
