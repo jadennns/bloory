@@ -7,7 +7,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, "src", "styles", "sass")],
   },
   images: {
-    domains: ["localhost", "bloory.vercel.app"],
+    domains: ["localhost", "bloory.netlify.app"],
   },
   typescript: {
     ignoreBuildErrors: true,
