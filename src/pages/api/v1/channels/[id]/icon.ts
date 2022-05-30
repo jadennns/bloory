@@ -19,7 +19,19 @@ export default withSessionRoute(async (req, res) => {
   const channel = await db.collection("channels").findOne({ id: req.query.id });
   if (!channel) return res.status(404).send({ message: "Channel not found" });
 
-  await db.collection("icons").insertOne({ data, id: req.query.id });
+  const icon = await db.collection("icons").findOne({ id: req.query.id });
+
+  !icon
+    ? await db.collection("icons").insertOne({ data, id: req.query.id })
+    : await db.collection("icons").updateOne(
+        { id: req.query.id },
+        {
+          $set: {
+            data,
+          },
+        }
+      );
+
   await db.collection("channels").updateOne(
     { id: req.query.id },
     {

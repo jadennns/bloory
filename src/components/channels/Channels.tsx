@@ -1,7 +1,6 @@
 import { ioConnect } from "lib/util/socketio";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Channel } from "../../../@types/dts/user";
 
 const client = ioConnect();
@@ -44,7 +43,7 @@ export default function Channels() {
         .map((channel, index) => (
           <Link href={"/app/@me/channels/" + channel.id} key={index + 1}>
             <div className='sidebar-icon group shadow-xl trans-grow'>
-              <Image
+              <img
                 src={channel.icon}
                 alt={`${channel.name} Icon`}
                 width={42}

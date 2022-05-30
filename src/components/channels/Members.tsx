@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { Channel, User } from "../../../@types/dts/user";
-import { FaUserSlash, FaSave } from "react-icons/fa";
+import { FaUserSlash, FaSave, FaDoorOpen, FaCopy } from "react-icons/fa";
 import { BsThreeDots, BsFillGearFill } from "react-icons/bs";
 import Link from "next/link";
 import styles from "styles/sass/Animations.module.scss";
@@ -36,7 +36,7 @@ export default function Members({
               className='flex items-center space-x-3 border-swatch-5 border-2 rounded-md px-3 w-[15rem] py-2'
               key={index + 1}
             >
-              <Image
+              <img
                 src={member.avatar}
                 alt={`${member.username} Username`}
                 width={32}
@@ -125,16 +125,15 @@ function ChannelTab({ channel }: { channel: Channel }) {
   return (
     <div className='flex items-start justify-between bg-swatch-5 py-3 px-4 w-[18rem] rounded-md'>
       <div className='flex items-start space-x-4'>
-        <input {...getInputProps()} />
         <div className='relative  tab-container'>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
-            <Image
+            <img
               src={data}
               alt={`${channel.name} Icon`}
               width={48}
               height={48}
-              className='rounded-md cursor-pointer opacity-1 block w-[100%] h-auto img-over'
+              className='rounded-md  cursor-pointer opacity-1 block h-auto img-over'
             />
             <div className='middle opacity-0 absolute top-[50%] left-[50%]'>
               <AiOutlineCamera
@@ -145,7 +144,22 @@ function ChannelTab({ channel }: { channel: Channel }) {
             </div>
           </div>
         </div>
-        <p className='text-gray-100 text-sm'>{channel.name}</p>
+        <div className='flex flex-col space-y-1 items-start'>
+          <p className='text-gray-100 text-sm'>{channel.name}</p>
+          <div className='flex items-center space-x-2'>
+            <FaDoorOpen
+              size={24}
+              className='text-rose-600 hover:text-rose-700'
+              cursor={"pointer"}
+            />
+            <FaCopy
+              size={18}
+              className='text-gray-300 hover:text-gray-400'
+              cursor={"pointer"}
+              onClick={() => navigator.clipboard.writeText(channel.id)}
+            />
+          </div>
+        </div>
       </div>
       {changed && (
         <FaSave
@@ -155,12 +169,11 @@ function ChannelTab({ channel }: { channel: Channel }) {
             fetch(`/api/v1/channels/${router.query.id}/icon`, {
               method: "POST",
               body: JSON.stringify({ data }),
-            }).then(() => {
-              setTimeout(
-                () => location.replace(`/app/@me/channels/${router.query.id}`),
-                1500
-              );
             });
+
+            setTimeout(() => {
+              location.reload();
+            }, 1000);
           }}
         />
       )}

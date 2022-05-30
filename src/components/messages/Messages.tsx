@@ -138,7 +138,7 @@ function MessageC({
 }) {
   return (
     <div className='flex items-center space-x-2'>
-      <Image
+      <img
         src={author.avatar}
         alt={`${author.username} Avatar`}
         width={45}
