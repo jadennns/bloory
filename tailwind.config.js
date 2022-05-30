@@ -6,36 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        button: "var(--color-button-text)",
-        transparent: "transparent",
-        primary: {
-          100: "var(--color-primary-100)",
-          200: "var(--color-primary-200)",
-          300: "var(--color-primary-300)",
-          600: "var(--color-primary-600)",
-          700: "var(--color-primary-700)",
-          800: "var(--color-primary-800)",
-          900: "var(--color-primary-900)",
-        },
-        secondary: {
-          DEFAULT: "var(--color-secondary)",
-          "washed-out": "var(--color-secondary-washed-out)",
-        },
-        accent: {
-          DEFAULT: "var(--color-accent)",
-          hover: "var(--color-accent-hover)",
-          disabled: "var(--color-accent-disabled)",
-        },
-        black: "#000",
         swatch: {
-          1: "#040505",
-          2: "#a3a2aa",
-          3: "#787986",
-          4: "#5d5f6c",
-          5: "#3b3940",
-          6: "#ccd3d5",
-          7: "#1135ea"
-        }
+          1: "#236bfd",
+          2: "#1c1e1f",
+          3: "#181a1c",
+          4: "rgba(22,24,25,255)",
+          5: "#27292d",
+          6: "#3c3f3e",
+        },
       },
     },
   },

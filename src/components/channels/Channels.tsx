@@ -20,9 +20,13 @@ export default function Channels() {
       console.log(`Listening for events : ${client.id}`)
     );
 
-    client.on("CHANNEL_CREATE", (payload) =>
-      setChannels([...channels, payload])
-    );
+    client.on("CHANNEL_CREATE", (payload) => {
+      setChannels([...channels, payload]);
+
+      setTimeout(() => {
+        location.replace(`/app/@me/channels/${payload.id}`);
+      }, 2000);
+    });
   }, [channels]);
 
   return (

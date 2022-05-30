@@ -12,7 +12,7 @@ export default function Main({ user }: Props) {
     <>
       <Title title='@Me' />
       <div className='grid grid-cols-3 gap-4'>
-        <Sidebar user={user} />
+        <Sidebar />
       </div>
     </>
   );

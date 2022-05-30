@@ -1,3 +1,4 @@
+import { sessionAuth } from "lib/sessionAuth";
 import { getChannelMessages } from "../../../../../../lib/controllers/messages/getChannelMessages";
 import createMessage from "lib/controllers/messages/createMessage";
 import { withSessionRoute } from "lib/session";
@@ -6,12 +7,18 @@ import { ioConnect } from "lib/util/socketio";
 const client = ioConnect();
 
 export default withSessionRoute(async (req, res) => {
+  sessionAuth(req, res);
   if (req.method == "POST") {
-    const { content, author, channel_id, type } = JSON.parse(req.body);
-    if (!content || !author || !channel_id)
+    const { content, channel_id, type } = JSON.parse(req.body);
+    if (!content || !channel_id)
       return res.status(400).send({ message: "Bad body request" });
 
-    const data = await createMessage({ content, author, channel_id, type });
+    const data = await createMessage({
+      content,
+      author: req.session.user.id,
+      channel_id,
+      type,
+    });
     client.emit("MESSAGE_CREATE", {
       ...data,
       author: req.session.user,

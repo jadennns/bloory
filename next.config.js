@@ -9,6 +9,9 @@ const nextConfig = {
   images: {
     domains: ["localhost", "bloory.vercel.app"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;

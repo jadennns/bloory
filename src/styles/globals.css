@@ -5,36 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-button-text: #fff;
-  --color-primary-100: #dee3ea;
-  --color-primary-200: #b2bdcd;
-  --color-primary-300: #5d7290;
-  --color-primary-600: #323d4d;
-  --color-primary-700: #242c37;
-  --color-primary-800: #151a21;
-  --color-primary-900: #0b0e11;
-  --color-secondary-washed-out: #879eed;
-  --color-secondary: #5575e7;
-  --color-accent-glow: rgba(253, 77, 77, 0.3);
-  --color-accent: #fd4d4d;
-  --color-accent-hover: #fd6868;
-  --color-accent-disabled: #f5bfbf;
-  --screen-height-reduction: 0px;
-  --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
-}
-
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: "Uni Sans", Verdana, Tahoma;
-}
-
-@layer base {
-  body {
-    @apply bg-swatch-1;
-  }
+  background-color: #161819;
+  height: 100%;
 }
 
 a {
@@ -52,9 +29,9 @@ a {
   }
 
   .sidebar-tooltip {
-    @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
-    text-white bg-swatch-5
-    text-xs font-semibold 
+    @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md absolute
+    text-white bg-swatch-6
+    text-xs 
     transition-all duration-100 scale-0 origin-left;
   }
 }
@@ -65,4 +42,28 @@ a {
 
 .trans-grow:hover {
   transform: scale(1.1);
+}
+
+.trans-down {
+  transition: all 0.5s ease-in-out;
+}
+
+.img-over {
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: 0.5s ease;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.tab-container:hover img {
+  opacity: 0.3;
+}
+
+.tab-container:hover .middle {
+  opacity: 1;
 }

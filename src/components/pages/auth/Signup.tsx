@@ -43,7 +43,7 @@ export default function SignUp() {
       />
       <div className={styles["slide-in"]}>
         <div className='flex items-center justify-center mt-0'>
-          <div className='rounded-md bg-gray-800 px-2 py-2 flex flex-col items-center space-y-6 w-[25rem]'>
+          <div className='rounded-md bg-swatch-2 px-2 py-2 flex flex-col items-center space-y-6 w-[25rem]'>
             <Question
               dispatch={setUsername}
               name='Username'

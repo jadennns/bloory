@@ -1,4 +1,5 @@
 import Title from "components/seo/Title";
+import Footer from "components/ui/Footer/Footer";
 import Navbar from "components/ui/Navbar/Navbar";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -51,6 +52,8 @@ export default function Home() {
         </div>
         <br />
       </div>
+      <br />
+      <Footer />
     </>
   );
 }
