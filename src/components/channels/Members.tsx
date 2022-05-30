@@ -100,6 +100,10 @@ function ChannelTab({ channel }: { channel: Channel }) {
   const [data, setData] = useState(channel.icon);
   const [changed, setChanged] = useState(false);
 
+  useEffect(() => {
+    setData(channel.icon);
+  }, [channel]);
+
   const onDrop = useCallback(([file]: File[]) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
