@@ -35,6 +35,7 @@ const RandomlyPositionedModal = styled(Modal)`
 export default function Sidebar() {
   const [openModal, setOpenModal] = useState(false);
   const [name, setName] = useState<string>();
+  const [clicked, setClicked] = useState(false);
 
   const handleCreateChannel = () => {
     if (name) {
@@ -43,7 +44,7 @@ export default function Sidebar() {
         body: JSON.stringify({
           name,
         }),
-      });
+      }).then(() => setClicked(true));
     }
   };
 
@@ -95,6 +96,7 @@ export default function Sidebar() {
             <button
               className='rounded-full bg-white hover:bg-gray-200 px-4 py-1 text-black '
               onClick={handleCreateChannel}
+              disabled={clicked}
             >
               Create
             </button>
