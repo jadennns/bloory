@@ -17,7 +17,6 @@ export default withSessionRoute(async (req, res) => {
 
   const db = await createChannel(name, req.session.user.id);
 
-  await fetch("/api/v1/socket");
   socket.emit("CHANNEL_CREATE", db);
 
   res.status(200).send({ message: "Created channel", data: db });

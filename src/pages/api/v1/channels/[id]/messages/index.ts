@@ -20,8 +20,6 @@ export default withSessionRoute(async (req, res) => {
       type,
     });
 
-    await fetch("/api/v1/socket");
-
     client.emit("MESSAGE_CREATE", {
       ...data,
       author: req.session.user,
