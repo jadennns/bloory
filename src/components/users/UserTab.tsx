@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
@@ -21,7 +20,7 @@ export default function UserTab({ user }: { user: User }) {
   return (
     <div className='flex items-start justify-between bg-swatch-5 py-4 px-5 w-[18rem]  rounded-md '>
       <div className='flex items-start space-x-4'>
-        <Image
+        <img
           src={user.avatar}
           width={52}
           height={52}
