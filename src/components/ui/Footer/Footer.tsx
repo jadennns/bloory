@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className='p-4 bg-swatch-2 shadow md:flex md:items-center md:justify-between md:p-6 '>
+    <footer className='p-4 bg-swatch-2 shadow md:flex md:items-center md:justify-between md:p-6 bottom-0 inset-x-0 '>
       <span className='text-sm text-gray-200 sm:text-center'>
         © 2022{" "}
         <a href='https://flowbite.com' className='hover:underline'>

@@ -14,7 +14,7 @@ export default function Home() {
   }, [router]);
 
   return (
-    <>
+    <div className='flex flex-col h-screen justify-between'>
       <Title title='Home' />
       <Navbar
         buttons={[
@@ -24,36 +24,30 @@ export default function Home() {
           },
         ]}
       />
-      <div className='flex flex-col space-y-[10rem] items-center justify-center mt-14'>
+      <div className='flex flex-col space-y-[5rem] items-center justify-center mt-14'>
         <div className='flex flex-col items-center space-y-3'>
           <h1 className='text-7xl text-white font-semibold'>Bloory</h1>
           <p className='text-gray-400 text-lg '>
-            Bloory adalah aplikasi chatting dimana kalian bisa ngobrol dengan
-            teman teman mu dari mana pun.
+            Connecting more people from accros the world.
           </p>
+          <br />
+          <button className='bg-blue-600 hover:bg-blue-700 rounded-full px-4 py-2 text-white '>
+            Create an account!
+          </button>
         </div>
         <div className={styles["slide-in"]}>
-          <div className='flex items-start space-x-5'>
+          <div className='border border-gray-100'>
             <Image
-              src={"/home/Home1.png"}
-              alt='Home 1'
-              width={300}
-              height={300}
+              src={"/home/Example.png"}
+              alt='Example 1'
+              width={"1024"}
+              height={"524"}
             />
-            <div className='flex flex-col items-start space-y-1'>
-              <p className='text-lg text-white font-semibold'>Fast</p>
-              <p className='text-base text-gray-400 w-[35rem]'>
-                Bloory gives a fast service, and a reliable system. You can send
-                messages quickly and the user on the other side can receive it
-                in real time.
-              </p>
-            </div>
           </div>
         </div>
-        <br />
       </div>
       <br />
       <Footer />
-    </>
+    </div>
   );
 }

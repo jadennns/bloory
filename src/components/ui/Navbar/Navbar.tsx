@@ -19,7 +19,7 @@ export default function Navbar({ buttons }: Props) {
           <div className='flex items-center relative space-x-2'>
             {buttons.map(({ name, link }, index) => (
               <Link href={link} key={index + 1}>
-                <button className='rounded-full px-6 py-[0.5rem] bg-white hover:bg-gray-200 text-gray-900 text-base'>
+                <button className='rounded-full px-6 py-[0.5rem] bg-gray-100 text-gray-900 text-base'>
                   {name}
                 </button>
               </Link>
