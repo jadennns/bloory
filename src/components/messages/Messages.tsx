@@ -1,4 +1,3 @@
-import { ioConnect } from "lib/util/socketio";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -6,8 +5,10 @@ import { Message, User } from "../../../@types/dts/user";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { useDropzone } from "react-dropzone";
+import { Socket } from "socket.io";
+import { ioConnect } from "lib/util/socketio";
 
-const io = ioConnect();
+const socket = ioConnect();
 
 export default function Messages({ user }: { user: User }) {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -25,9 +26,13 @@ export default function Messages({ user }: { user: User }) {
   }, [router]);
 
   useEffect(() => {
-    io.on("connect", () => console.log(`Connected to socket : ${io.id}`));
+    socket.on("connect", () =>
+      console.log(`Listening for events : ${socket.id}`)
+    );
 
-    io.on("MESSAGE_CREATE", (payload) => setMessages([...messages, payload]));
+    socket.on("MESSAGE_CREATE", (payload) => {
+      setMessages([...messages, payload]);
+    });
   }, [messages]);
 
   const onDrop = useCallback((files: File[]) => {

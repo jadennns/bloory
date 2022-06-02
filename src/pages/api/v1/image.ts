@@ -19,6 +19,6 @@ export default withSessionRoute(async (req, res) => {
 
   res.status(200).send({
     message: "Image created",
-    data: { url: `${process.env.DOMAIN}/api/cdn/images/${uniqe}` },
+    data: { url: `https://bloory-cdn.up.railway.app/attachments/${uniqe}` },
   });
 });

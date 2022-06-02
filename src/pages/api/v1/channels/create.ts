@@ -3,7 +3,7 @@ import { withSessionRoute } from "lib/session";
 import { sessionAuth } from "lib/sessionAuth";
 import { ioConnect } from "lib/util/socketio";
 
-const client = ioConnect();
+const socket = ioConnect();
 
 export default withSessionRoute(async (req, res) => {
   sessionAuth(req, res);
@@ -17,7 +17,8 @@ export default withSessionRoute(async (req, res) => {
 
   const db = await createChannel(name, req.session.user.id);
 
-  client.emit("CHANNEL_CREATE", db);
+  await fetch("/api/v1/socket");
+  socket.emit("CHANNEL_CREATE", db);
 
   res.status(200).send({ message: "Created channel", data: db });
 });

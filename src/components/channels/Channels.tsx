@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Channel } from "../../../@types/dts/user";
 
-const client = ioConnect();
+const socket = ioConnect();
 
 export default function Channels() {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -15,11 +15,11 @@ export default function Channels() {
   }, []);
 
   useEffect(() => {
-    client.on("connect", () =>
-      console.log(`Listening for events : ${client.id}`)
+    socket.on("connect", () =>
+      console.log(`Listening for events : ${socket.id}`)
     );
 
-    client.on("CHANNEL_CREATE", (payload) => {
+    socket.on("CHANNEL_CREATE", (payload) => {
       setChannels([...channels, payload]);
 
       setTimeout(() => {

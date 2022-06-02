@@ -19,6 +19,9 @@ export default withSessionRoute(async (req, res) => {
       channel_id,
       type,
     });
+
+    await fetch("/api/v1/socket");
+
     client.emit("MESSAGE_CREATE", {
       ...data,
       author: req.session.user,

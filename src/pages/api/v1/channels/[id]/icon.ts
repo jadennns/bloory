@@ -1,9 +1,6 @@
 import { dbConnect } from "lib/mongodb";
 import { withSessionRoute } from "lib/session";
 import { sessionAuth } from "lib/sessionAuth";
-import { ioConnect } from "lib/util/socketio";
-
-const io = ioConnect();
 
 export default withSessionRoute(async (req, res) => {
   sessionAuth(req, res);
@@ -36,13 +33,13 @@ export default withSessionRoute(async (req, res) => {
     { id: req.query.id },
     {
       $set: {
-        icon: `${process.env.DOMAIN}/api/cdn/icons/${req.query.id}`,
+        icon: `https://bloory-cdn.up.railway.app/icons/${req.query.id}`,
       },
     }
   );
 
   res.status(200).send({
     message: "Icon updated.",
-    data: { url: `${process.env.DOMAIN}/api/cdn/icons/${req.query.id}` },
+    data: { url: `https://bloory-cdn.up.railway.app/icons/${req.query.id}` },
   });
 });

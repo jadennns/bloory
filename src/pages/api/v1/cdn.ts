@@ -17,13 +17,15 @@ export default withSessionRoute(async (req, res) => {
       .collection("users")
       .updateOne(
         { id: user },
-        { $set: { avatar: `${process.env.DOMAIN}/api/cdn/avatars/${user}` } }
+        {
+          $set: { avatar: `https://bloory-cdn.up.railway.app/avatars/${user}` },
+        }
       );
 
     // @ts-expect-error
     req.session.user = {
       ...req.session.user,
-      avatar: `${process.env.DOMAIN}/api/cdn/avatars/${user}`,
+      avatar: `https://bloory-cdn.up.railway.app/avatars/${user}`,
     };
 
     await req.session.save();
