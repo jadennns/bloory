@@ -30,17 +30,21 @@ const PositionedModal = styled(Modal)`
 
 export default function Backdrop({
   children,
-  state,
+  open,
+  setOpen,
 }: {
   children: ReactNode;
-  state: [boolean, Dispatch<SetStateAction<boolean>>];
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <PositionedModal
-      show={state[0]}
-      onHide={() => state[1](false)}
-      renderBackdrop={(props: any) => <Backdrop {...props} />}
+      show={open}
+      onHide={() => setOpen(false)}
+      renderBackdrop={(props: any) => <BackdropDiv {...props} />}
       aria-labelledby='modal-label'
-    ></PositionedModal>
+    >
+      {children}
+    </PositionedModal>
   );
 }

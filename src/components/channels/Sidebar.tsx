@@ -48,29 +48,27 @@ export default function Sidebar() {
           </span>
         </div>
       </div>
-      {openModal && (
-        <Backdrop state={[openModal, setOpenModal]}>
-          <div className='flex items-center flex-col space-y-6'>
-            <div className='flex flex-col items-center space-y-2'>
-              <p className='text-lg text-white font-semibold'>Channel Name</p>
-              <input
-                type='text'
-                className='outline-none rounded-md px-1 py-1 bg-swatch-6 text-gray-300 placeholder:text-gray-300 w-[20rem]'
-                placeholder='New channel name'
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-              />
-            </div>
-            <button
-              className='rounded-full bg-white hover:bg-gray-200 px-4 py-1 text-black '
-              onClick={handleCreateChannel}
-              disabled={clicked}
-            >
-              Create
-            </button>
+      <Backdrop open={openModal} setOpen={setOpenModal}>
+        <div className='flex items-center flex-col space-y-6'>
+          <div className='flex flex-col items-center space-y-2'>
+            <p className='text-lg text-white font-semibold'>Channel Name</p>
+            <input
+              type='text'
+              className='outline-none rounded-md px-1 py-1 bg-swatch-6 text-gray-300 placeholder:text-gray-300 w-[20rem]'
+              placeholder='New channel name'
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
           </div>
-        </Backdrop>
-      )}
+          <button
+            className='rounded-full bg-white hover:bg-gray-200 px-4 py-1 text-black '
+            onClick={handleCreateChannel}
+            disabled={clicked}
+          >
+            Create
+          </button>
+        </div>
+      </Backdrop>
     </>
   );
 }
