@@ -1,18 +1,28 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Message, User } from "../../../@types/dts/user";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { MdOutlineEmojiSymbols } from "react-icons/md";
 import { useDropzone } from "react-dropzone";
-import { Socket } from "socket.io";
 import { ioConnect } from "lib/util/socketio";
+import { AiOutlineSearch } from "react-icons/ai";
+import styles from "styles/sass/Animations.module.scss";
 
 const socket = ioConnect();
 
 export default function Messages({ user }: { user: User }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [content, setContent] = useState<string>();
+  const [openEmojis, setOpenEmojis] = useState(false);
 
   const textAreaRef = useRef<any>(null);
   const bottomRef = useRef<any>(null);
@@ -91,6 +101,10 @@ export default function Messages({ user }: { user: User }) {
     }
   };
 
+  const handleEmojis = () => {
+    setOpenEmojis(!openEmojis);
+  };
+
   return (
     <>
       <div className='h-screen mt-10 right-0'>
@@ -101,11 +115,11 @@ export default function Messages({ user }: { user: User }) {
             ))}
             <div ref={bottomRef} />
           </div>
-          <div className='w-[55rem] px-1 py-1 bg-[#27292d] rounded-md flex items-center space-x-3 text-sm'>
+          <div className='w-[56rem] px-1 py-1 bg-[#27292d] rounded-md flex items-center space-x-3 text-sm'>
             <textarea
               onChange={(e) => setContent(e.target.value)}
               value={content}
-              className='outline-none bg-transparent px-1 text-gray-100 w-[49rem]  resize-none'
+              className='outline-none bg-transparent px-1 text-gray-100 w-[49rem]  resize-none scrollbar-thin scrollbar-thumb-swatch-6 placeholder:select-none'
               placeholder='Type your message'
               onKeyPress={(e) => {
                 if (e.key == "Enter" && !e.shiftKey) {
@@ -114,15 +128,34 @@ export default function Messages({ user }: { user: User }) {
                 }
               }}
               ref={textAreaRef}
+              id='message_box'
+              onClick={() => {
+                setOpenEmojis(false);
+              }}
             />
+            <div className='flex flex-col items-center space-y-1'>
+              {openEmojis && (
+                <div className='absolute mt-[-15rem]'>
+                  <EmojisBar setContent={setContent} content={content} />
+                </div>
+              )}
+              <MdOutlineEmojiSymbols
+                className='text-[#d3d4d3]'
+                size={25}
+                cursor='pointer'
+                onClick={handleEmojis}
+              />
+            </div>
             <div {...getRootProps()}>
               <input {...getInputProps()} />
+
               <BsFillPlusSquareFill
                 className='text-[#d3d4d3]'
                 size={25}
                 cursor='pointer'
               />
             </div>
+
             <RiSendPlaneFill
               className='text-[#d3d4d3]'
               size={25}
@@ -135,6 +168,102 @@ export default function Messages({ user }: { user: User }) {
     </>
   );
 }
+
+function EmojisBar({
+  setContent,
+  content,
+}: {
+  setContent: Dispatch<SetStateAction<string | undefined>>;
+  content: string | undefined;
+}) {
+  const [emojis, setEmojis] = useState([
+    "⚽️",
+    "🏀",
+    "🏈",
+    "⚾️",
+    "🎾",
+    "🏐",
+    "🏉",
+    "🎱",
+    "🏓",
+    "🏸",
+    "🥅",
+    "🏒",
+    "🏑",
+    "🏏",
+    "⛳️",
+    "🏹",
+    "🎣",
+    "🥊",
+    "🥋",
+    "⛸",
+    "🎿",
+    "🚗",
+    "🚕",
+    "🚙",
+    "🚌",
+    "🚎",
+    "🏎",
+    "🚓",
+    "🚑",
+    "🚒",
+    "🚐",
+    "🚚",
+    "🚛",
+    "🚜",
+    "🛴",
+    "🚲",
+    "🛵",
+    "🏍",
+    "🚨",
+    "🚔",
+    "🚍",
+    "🚘",
+    "🚖",
+    "🚡",
+    "🚠",
+    "🚟",
+    "🚃",
+    "🚋",
+    "🚞",
+    "🚝",
+    "🚄",
+    "🚅",
+  ]);
+
+  const [emojiName, setEmojiName] = useState<string>();
+
+  return (
+    <div className={styles["growdown"]}>
+      <div className='bg-[#27292d] w-[15rem] rounded-md flex flex-col space-y-3 px-2 py-2  h-[13rem]'>
+        <div className='flex items-center space-x-2 bg-swatch-3 px-1 py-1 rounded-md'>
+          <AiOutlineSearch className='text-[#d3d4d3]' size={19} />
+          <input
+            type='text'
+            className='outline-none bg-transparent text-sm text-gray-100'
+            value={emojiName}
+            onChange={(e) => setEmojiName(e.target.value)}
+          />
+        </div>
+        <div className='grid grid-cols-6 gap-2 h-[10rem] scrollbar scrolbar-thumb-swatch-4'>
+          {emojis.map((emoji, index) => (
+            <p
+              key={index + 1}
+              className='select-none cursor-pointer'
+              onClick={() =>
+                setContent(content ? `${content} ${emoji}` : emoji)
+              }
+            >
+              {emoji}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const emojis = [];
 
 function MessageC({
   message: { author, content, type },

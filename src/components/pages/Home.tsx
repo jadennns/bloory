@@ -2,6 +2,7 @@ import Title from "components/seo/Title";
 import Footer from "components/ui/Footer/Footer";
 import Navbar from "components/ui/Navbar/Navbar";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styles from "styles/sass/Animations.module.scss";
@@ -31,9 +32,11 @@ export default function Home() {
             Connecting more people from accros the world.
           </p>
           <br />
-          <button className='bg-blue-600 hover:bg-blue-700 rounded-full px-4 py-2 text-white '>
-            Create an account!
-          </button>
+          <Link href={"/auth/signup"}>
+            <button className='bg-blue-600 hover:bg-blue-700 rounded-full px-4 py-2 text-white '>
+              Create an account!
+            </button>
+          </Link>
         </div>
         <div className={styles["slide-in"]}>
           <div className='border border-gray-100'>
